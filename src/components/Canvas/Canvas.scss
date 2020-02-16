@@ -1,0 +1,15 @@
+@import '@MasterStyle';
+
+:root {
+    --btn-color: var(--color-white);
+    --btn-background: var(--color-primary-500);
+    --btn-border: var(--color-white);
+}
+
+.canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

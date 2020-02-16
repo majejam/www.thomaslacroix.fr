@@ -8,24 +8,17 @@
 
 <p align="center">
   <a href="https://github.com/vuejs/vue">
-    <img src="https://img.shields.io/badge/vue-2.6.11-brightgreen.svg" alt="vue">
+    <img src="https://img.shields.io/badge/vue-2.5.16-brightgreen.svg" alt="vue">
   </a>
-  <a href="https://github.com/qraimbault/vue-js-starter-scss/releases">
-    <img src="https://img.shields.io/github/v/release/qraimbault/vue-js-starter-scss.svg" alt="version">
+  <a href="https://www.travis-ci.org/QRaimbault/vue-js-starter-scss" rel="nofollow">
+    <img src="https://www.travis-ci.org/QRaimbault/vue-js-starter-scss.svg?branch=master" alt="Build Status">
   </a>
-  <a href="https://www.travis-ci.org/qraimbault/vue-js-starter-scss" rel="nofollow">
-    <img src="https://www.travis-ci.org/qraimbault/vue-js-starter-scss.svg?branch=master" alt="Build Status">
-  </a>
-  <a href="https://github.com/QRaimbault/vue-js-starter-scss/blob/master/LICENSE">
-    <img src="https://img.shields.io/npm/l/vue.svg" alt="License">
-  </a>
+  <img src="https://img.shields.io/npm/l/vue.svg" alt="License">
 </p>
 
 ## Summary
 
-A lightweight Vue.js starter.
-
-**YOU CAN READ THIS DOC IN A MORE FRIENDLY WAY [HERE](https://qraimbault.github.io/vue-js-starter-scss/#/).**
+A lightweight Vue.js starter.  
 
 - [Vue.JS Starter](#vuejs-starter)
   - [Summary](#summary)
@@ -115,14 +108,14 @@ API use Axios and the base configuration is set in application configuration fil
 
 ```js
 export const APIConfig = {
-  baseURL: '',
+  baseURL: "",
   withCredentials: true,
   crossDomain: true,
   contentType: false,
-  responseType: 'json',
+  responseType: "json",
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
+    Accept: "application/json",
+    "Content-Type": "application/json"
   }
 };
 ```
@@ -132,7 +125,7 @@ Axios configuration reference is available [here](https://github.com/axios/axios
 The Axios instance is then generated and exported in `src/helpers/API.js` and you can import it in your views/components this way:
 
 ```js
-import api from '@API';
+import api from "@API";
 ```
 
 ## Vuex
@@ -161,7 +154,7 @@ You can also put style in the `<style>` tag in each component, scoped or not, th
 Assets (images, fonts...) used directly in views (Like logo... etc) should be placed in src/assets (`@Asset`) and imported like a JavaScript module and used like a variable. Example:
 
 ```js
-import logo from '@/images/logo.png';
+import logo from "@/images/logo.png";
 ```
 
 You can also import it in scss using webpack resolved path or relative path as usual. Example:
@@ -208,13 +201,13 @@ Webpack allows to put some aliases in the webpack config, so you can have shorte
 An example usage of these aliases is to get the API helper from a view/component:
 
 ```js
-import api from '@API';
+import api from "@API";
 ```
 
 Or to get a component from a view:
 
 ```js
-import Articles from '@Component/Index/Articles.vue';
+import Articles from "@Component/Index/Articles.vue";
 ```
 
 ## Unit Testing

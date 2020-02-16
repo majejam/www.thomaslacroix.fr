@@ -1,0 +1,605 @@
+// =======================
+// Tools / Mixins
+// =======================
+
+/// Placeholder
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   @include placeholder() {
+///     color: blue;
+///   }
+///
+/// @example css - CSS output
+///   &::-webkit-input-placeholder {
+///     color: blue;
+///   }
+///   &:-moz-placeholder {
+///     color: blue;
+///   }
+///   &:-ms-input-placeholder {
+///     color: blue;
+///   }
+/* stylelint-disable */
+@mixin placeholder() {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+/* stylelint-enable */
+
+/// Flexbox vertical Centering (apply this class on the parent element of your targeted children)
+@mixin flex-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+/// Flexbox absolute centering (apply this class on the parent element of your targeted children)
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   .foo {
+///     @include flex-absolute-center();
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     display: flex;
+///     align-items: center;
+///     justify-content: center;
+///   }
+@mixin flex-absolute-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/// Vertical Center
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   .foo {
+///     @include vertical-center();
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     position: absolute;
+///     top: 50%;
+///     transform: translateY(-50%);
+///   }
+@mixin vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/// Horizontal Center
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   .foo {
+///     @include horizontal-center();
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     position: absolute;
+///     left: 50%;
+///     transform: translateX(-50%);
+///   }
+@mixin horizontal-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/// Vertical & Horizontal Center
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   .foo {
+///     @include absolute-center();
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     position: absolute;
+///     margin: auto;
+///     top: 0;
+///     right: 0;
+///     bottom: 0;
+///     left: 0;
+///   }
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/// Retinize Images 
+@mixin retinize($file, $type, $height, $width) {
+  background-image: url($imgsrc + $file + '.' + $type);
+  @media #{$is-hdpi} {
+    & {
+      background-image: url($imgsrc + $file + '-2x' + $type);
+      @include background-size ($width, $height);
+    }
+  }
+}
+
+/// Subtle Separator
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss
+/// li + li {
+///   // simulates border-top: 1px solid rgba(black, 0.2); 
+///   @include subtle-sep(top, 1px, rgba(black, 0.2)); //Or bottom or left
+/// }
+@mixin subtle-sep( $dir, $width, $color) {
+  $gradient: to left;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: "";
+    #{$dir}: 0;
+    @if $dir==bottom or $dir==top {
+      display: block;
+      height: $width;
+      width: 100%;
+      left: 0;
+    }
+    @else {
+      top: 0;
+      width: $width;
+      height: 100%;
+      $gradient: top;
+    }
+    background: linear-gradient($gradient, transparent, $color, transparent);
+  }
+}
+
+/// Dropdown link mixin which changes its children color according to its background color.
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss
+/// .dropdown {
+///   @include dropdown(1rem, $bgc-dropdown);
+///   padding-top: .6rem;
+///   padding-bottom: .6rem; 
+/// }
+/// @param {Number} $padding - Padding left and right applied on the dropdown container
+/// @param {String} $bgc-dropdown - Background color of the dropdown container
+@mixin dropdown( $padding-dropdown, $bgc-dropdown) {
+  width: 100%;
+  padding-left: $padding-dropdown;
+  padding-right: $padding-dropdown;
+  background-color: $bgc-dropdown;
+  color: set-color($bgc-dropdown);
+}
+
+/// Icon Mixin aimed to fake an icon but made in pure html. For example a round icon wrapping a step or section number or an icon font wrapped in a rounded '<div>'. Only made to be use inside a dropdown.
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss {
+///  @include icon(3rem, 3px, $blue);  
+/// }
+/// @param {Number} $size - Size of the parent wrapping our content
+/// @param {Number} $border-width - Border width of the parent wrapping our content
+/// @param {String} $border-color - Border color of the parent wrapping our content
+/// @param {String} $background-color - Background color of the parent wrapping our content
+@mixin icon($size, $border-width: null, $border-color: null, $background-color: transparent) {
+  @include flex-absolute-center();
+  width: $size;
+  height: $size;
+  border: $border-width solid $border-color;
+  background-color: $background-color;
+  border-radius: 50%;
+}
+
+/// Mixin helping defining both `width` and `height` simultaneously.
+///
+/// @author Hugo Giraudel
+///
+/// @access public
+///
+/// @param {Length} $width - Element’s `width`
+/// @param {Length} $height ($width) - Element’s `height`
+///
+/// @example scss - Usage
+///   .foo {
+///     @include size(10em);
+///   }
+///
+///   .bar {
+///     @include size(100%, 10em);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     width: 10em;
+///     height: 10em;
+///   }
+///
+///   .bar {
+///     width: 100%;
+///     height: 10em;
+///   }
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+/// Mixin reseting the default link style set in components/links. That way you can define some other style for particular links. For example in footer, header, or other kind of components.
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @param {String} $color - color of the link on default and hover states.
+/// @example scss - Usage
+///   .foo {
+///     @include size(10em);
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     width: 10em;
+///     height: 10em;
+///   }
+@mixin reset-link($color) {
+  text-decoration: none;
+  color: $color;
+
+  &:hover {
+    color: $color;
+  }
+}
+
+/// Mixin removing the default outline. That way you can define some other style for particular elements such as buttons. For example the toggle button in the card component.
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   .foo {
+///     @include no-outline();
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     outline: none;
+///   }
+///   .foo:active {
+///     outline: none;
+///   }
+///   .foo:focus {
+///     outline: none;
+///   } 
+@mixin no-outline() {
+  outline: none;
+
+  &:active {
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/// Mixin allowing to keep the initial aspect ratio of an element.
+///
+/// @author Jakob-e
+///
+/// @access public
+///
+/// @link https://codepen.io/jakob-e/pen/LEdWNB
+///
+/// @example scss - Usage
+/// .class { @include aspect-ratio(); }            // No arguments defaults to a 1:1 ratio
+/// .class { @include aspect-ratio(16, 9); }       // Width and height     
+/// .class { @include aspect-ratio(1.777778); }    // Ratio (calculated width/height)         
+/// .class { @include aspect-ratio(4px, 3px); }    // Comparable units 
+/// .class { @include aspect-ratio($ratio: 1.2); } // Keywords 
+@mixin aspect-ratio($ratio-or-width, $height: null) {
+  $padding: if($height, percentage($height/$ratio-or-width), percentage(1/$ratio-or-width));
+
+  &::before {
+    content: '';
+    float: left;
+    padding-bottom: $padding;
+  }
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/// Mixin providing a png fallback for an svg background image. It works by defining two background-image on a container. Browsers that support multiple background images will display the svg whereas those that don't support it will display the png. It uses the variable $public-path available in scss/tools/variables/site-settings.scss
+///
+/// @author Ben Schwarz (@benschwarz)
+///
+/// @access public
+///
+/// @link http://germanforblack.com/post/43975575422/protip-all-browsers-that-support-svg-background
+///
+/// @example scss - Usage
+/// .logo-sporteasy { 
+///    @include touch-input-tooltip(logo_sporteasy);
+/// } 
+/// @example css - CSS output
+/// .logo-sporteasy {
+///    background-image: url('#{$public_path}images/logo_sporteasy.png');
+///    background-image: none, url('#{$public_path}images/logo_sporteasy.svg');
+/// }
+@mixin vector-bg-with-fallback($name) {
+  background-image: url('#{$public_path}images/frontend/logos/#{$name}.png');
+  background-image: none, url('#{$public_path}images/frontend/logos/#{$name}.svg');
+}
+
+/// Given the location of a webfont, will generate a font-face declaration with multiple file formats. IE9+ Support :)
+/// @access public
+/// @param {String} $font-name - Font family name
+/// @param {String} $file-name - File name with directory
+/// @example scss - Usage
+///   @include font-face('gotham', '/fonts/gotham');
+/* stylelint-disable */
+@mixin font-face($font-name, $file-name) {
+  @font-face {
+    font-family: quote($font-name);
+    src: url($file-name + '.woff2') format('woff2'),
+         url($file-name + '.woff') format('woff'),
+         url($file-name + '.otf') format('opentype');
+  }
+}
+/* stylelint-enable */
+
+/// Background gradient helper
+/// @access public
+/// @param {Color} $start-color - Start color
+/// @param {Color} $end-color - End color
+/// @param {String} $orientation - Type of gradient, either `vertical`, `horizontal` or `radial`
+/// @example scss - Usage
+///   .foo {
+///     @include background-gradient(red, black, 'vertical');
+///   }
+/// @example css - Result
+///   .foo {
+///     background: -webkit-linear-gradient(top, red, black);
+///     background: linear-gradient(to bottom, red, black);
+///   }
+@mixin background-gradient($start-color,
+$end-color,
+$orientation) {
+  background: $start-color;
+  @if $orientation=='vertical' {
+    background: linear-gradient(to bottom, $start-color, $end-color);
+  }
+  @else if $orientation=='horizontal' {
+    background: linear-gradient(to right, $start-color, $end-color);
+  }
+  @else {
+    background: radial-gradient(ellipse at center, $start-color, $end-color);
+  }
+}
+
+/// Background gradient helper
+/// @author Zach Leatherman (@zachleat)
+///
+/// @access public
+///
+/// @link https://github.com/zachleat/zachleat.com/blob/a05bd3ff3391402a7fbeaf7fa699f21261c06b2e/web/css/_mixins.scss#L49
+@mixin textDecorationSkipInkFallback {
+  @supports (background-image: linear-gradient(to bottom, currentColor 75%, currentColor 75%)) and (not(text-decoration-skip: ink)) {
+    & {
+      text-decoration: none;
+      background-image: linear-gradient(to bottom, currentColor 75%, currentColor 75%);
+      text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
+      background-repeat: repeat-x;
+      background-size: 1px 1px;
+      background-position: 0 97%;
+    }
+  }
+}
+
+/// Precise control over responsive typography for Sass. `strip-unit()` function by Hugo Giraudel
+/// @access public
+/// @param {String} $min-vw - Minimum viewport width
+/// @param {String} $max-vw - Maximum viewport width
+/// @param {String} $min-font-size - Minimum font size
+/// @param {String} $max-font-size - Maximum font size
+/// @example scss - Usage
+///   @include fluid-type(320px, 1440px, 14px, 18px);
+/// @link http://madebymike.com.au/writing/precise-control-responsive-typography/
+/* stylelint-disable */
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+/* stylelint-enable */
+
+
+/// Mixin cropping text when it overflows of its parent element
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   .foo {
+///     @include limit-text;
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     white-space: nowrap;
+///     overflow: hidden;
+///     text-overflow: ellipsis;
+///   }
+///
+@mixin limit-text() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/// Mixin allowing text to be selectable
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   .foo {
+///     @include text-selectable;
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     -webkit-user-select: text !important;
+///     user-select: text !important;
+///     cursor: initial;
+///   }
+///
+@mixin text-selectable() {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  cursor: initial;
+}
+
+/// Mixin styling the input displayed inside a MainPanel element when it being renamed
+///
+/// @author Louis Chenais
+///
+/// @access public
+///
+/// @example scss - Usage
+///   .foo {
+///     @include main-panel-element-rename-input;
+///   }
+///
+/// @example css - CSS output
+///   .foo {
+///     padding-left: calc(var(--base-space-1) / 2);
+///     padding-right: calc(var(--base-space-1) / 2);
+///     border-radius: var(--border-radius);
+///     background-color: var(--white);
+///     border: 1px solid var(--color-app);
+///   }
+///
+@mixin main-panel-element-rename-input() {
+  padding-left: calc(var(--base-space-1) / 2);
+  padding-right: calc(var(--base-space-1) / 2);
+  border-radius: var(--border-radius);
+  background-color: var(--white);
+
+  &:focus {
+    border: 1px solid var(--color-app);
+  }
+}
+
+/// Given the location of a webfont, will generate a font-face declaration with multiple file formats. IE9+ Support :)
+/// @access public
+/// @param {String} $square-size - Square size
+/// @example scss - Usage
+///   @include damier-background(8px);
+/* stylelint-disable */
+@mixin damier-background($square-size) {
+  --square-size: #{$square-size};
+
+  background-image: var(--damier-background);
+  background-size: calc(var(--square-size) * 2) calc(var(--square-size) * 2);
+  background-position: 0 0, var(--square-size) var(--square-size);
+  background-repeat: repeat;
+}
+
+/// This mixin is meant to be applied inside the class wrapping the style of the uiComponent DnD ghost
+/// @access public
+/// @example scss - Usage
+///   @include ui-component-dnd-ghost-background();
+@mixin ui-component-dnd-ghost-background() {
+  &.is-fake-dragged__content--dark {
+    background-color: var(--neutral-900A);
+  }
+  
+  &.is-fake-dragged__content--grey {
+    background-color: var(--neutral-100);
+  }
+  
+  &.is-fake-dragged__content--light {
+    background-color: var(--white);
+  }
+  
+  &.is-fake-dragged__content--damier {
+    background-color: var(--white);
+    @include damier-background(8px);
+  }
+}
+
+/// This mixin is used to style the text selection
+/// @access public
+/// @example scss - Usage
+///   @include text-selection();
+@mixin text-selection() {
+  background: var(--color-app);
+  color: var(--white);
+  text-shadow: none;
+}
+
+/// This mixin is used to properly align elements in the MainView that takes all the width
+/// @access public
+/// @example scss - Usage
+///   @include main-view-content-aligner();
+@mixin main-view-content-aligner() {
+  width: calc(100% - (var(--main-view-offset) * 2));
+  margin-left: var(--main-view-offset);
+}

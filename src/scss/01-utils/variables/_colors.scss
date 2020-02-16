@@ -1,0 +1,132 @@
+// ----------------------
+// == Colors
+// ----------------------
+
+// Graphic chart
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-red: #fa4a4a;
+  --color-blue: #202f55;
+  --color-grey-10: rgba(0,0,0, .05);
+  --color-grey-20: rgba(0,0,0, .1);
+  --color-grey-30: rgba(0,0,0, .27);
+  --color-grey-40: rgba(0,0,0, .4);
+  --color-grey-50: rgba(0,0,0, .57);
+  --color-lightgrey-10: #f9f9f9;
+  --color-lightgrey-20: #e5e7ea;
+  --color-orange: #d35400;
+  --color-green: #27ae60;
+  --color-purple-300: #bfA9f2;
+  --color-purple-400: #9474dd;
+  --color-purple-500: #7A57d1;
+  --color-purple-600: #6032c3;
+  --color-purple-700: #4300b3;
+
+  --color-primary-100: #C8FBE9;
+  --color-primary-200: #94F7DD;
+  --color-primary-300: #5CE8CF;
+  --color-primary-400: #34D1C2;
+  --color-primary-500: #00B3B2;
+  --color-primary-600: #008D99;
+  --color-primary-700: #006B80;
+  --color-primary-800: #004D67;
+  --color-primary-900: #003855;
+  --color-primary-transparent-100: rgba(0, 179, 178, 0.08);
+  --color-primary-transparent-200: rgba(0, 179, 178, 0.16);
+  --color-primary-transparent-300: rgba(0, 179, 178, 0.24);
+  --color-primary-transparent-400: rgba(0, 179, 178, 0.32);
+  --color-primary-transparent-500: rgba(0, 179, 178, 0.4);
+  --color-primary-transparent-600: rgba(0, 179, 178, 0.48);
+
+  --color-success-100: #F2FBCE;
+  --color-success-200: #E3F7A0;
+  --color-success-300: #C7E86D;
+  --color-success-400: #A8D246;
+  --color-success-500: #7FB515;
+  --color-success-600: #679B0F;
+  --color-success-700: #51820A;
+  --color-success-800: #3D6806;
+  --color-success-900: #2F5604;
+  --color-success-transparent-100: rgba(127, 181, 21, 0.08);
+  --color-success-transparent-200: rgba(127, 181, 21, 0.16);
+  --color-success-transparent-300: rgba(127, 181, 21, 0.24);
+  --color-success-transparent-400: rgba(127, 181, 21, 0.32);
+  --color-success-transparent-500: rgba(127, 181, 21, 0.4);
+  --color-success-transparent-600: rgba(127, 181, 21, 0.48);
+
+  --color-info-100: #CFE9FF;
+  --color-info-200: #9FCFFF;
+  --color-info-300: #70B1FF;
+  --color-info-400: #4C97FF;
+  --color-info-500: #116CFF;
+  --color-info-600: #0C53DB;
+  --color-info-700: #083DB7;
+  --color-info-800: #052B93;
+  --color-info-900: #031E7A;
+  --color-info-transparent-100: rgba(17, 108, 255, 0.08);
+  --color-info-transparent-200: rgba(17, 108, 255, 0.16);
+  --color-info-transparent-300: rgba(17, 108, 255, 0.24);
+  --color-info-transparent-400: rgba(17, 108, 255, 0.32);
+  --color-info-transparent-500: rgba(17, 108, 255, 0.4);
+  --color-info-transparent-600: rgba(17, 108, 255, 0.48);
+
+  --color-warning-100: #FFF9CC;
+  --color-warning-200: #FFF099;
+  --color-warning-300: #FFE666;
+  --color-warning-400: #FFDC3F;
+  --color-warning-500: #FFCC00;
+  --color-warning-600: #DBAA00;
+  --color-warning-700: #B78B00;
+  --color-warning-800: #936D00;
+  --color-warning-900: #7A5700;
+  --color-warning-transparent-100: rgba(255, 204, 0, 0.08);
+  --color-warning-transparent-200: rgba(255, 204, 0, 0.16);
+  --color-warning-transparent-300: rgba(255, 204, 0, 0.24);
+  --color-warning-transparent-400: rgba(255, 204, 0, 0.32);
+  --color-warning-transparent-500: rgba(255, 204, 0, 0.4);
+  --color-warning-transparent-600: rgba(255, 204, 0, 0.48);
+
+  --color-danger-100: #FFE5D5;
+  --color-danger-200: #FFC4AB;
+  --color-danger-300: #FF9C81;
+  --color-danger-400: #FF7661;
+  --color-danger-500: #FF382D;
+  --color-danger-600: #DB2026;
+  --color-danger-700: #B71629;
+  --color-danger-800: #930E28;
+  --color-danger-900: #7A0828;
+  --color-danger-transparent-100: rgba(255, 56, 45, 0.08);
+  --color-danger-transparent-200: rgba(255, 56, 45, 0.16);
+  --color-danger-transparent-300: rgba(255, 56, 45, 0.24);
+  --color-danger-transparent-400: rgba(255, 56, 45, 0.32);
+  --color-danger-transparent-500: rgba(255, 56, 45, 0.4);
+  --color-danger-transparent-600: rgba(255, 56, 45, 0.48);
+
+  --color-white : #ffffff;
+  
+
+  --color-primary: var(--color-purple-600);
+  --color-error: var(--color-red);
+  --color-success: var(--color-green);
+}
+
+// Using Sass Maps as explained here : https://jonsuh.com/blog/sass-maps/
+$social-colors: (
+  facebook: #3b5998,
+  twitter: #43bfe1,
+  dribbble: #ea4c89,
+  github: #171515,
+  google: #db4437,
+  youtube: #c4302b,
+  linkedin: #3272bd
+);
+
+@each $social-network,
+$social-color in $social-colors {
+  .icon--#{$social-network} {
+    color: $social-color;
+  }
+}
+// Example : <a class=icon icon--dribbble>Dribbble</a>
+

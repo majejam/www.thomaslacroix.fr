@@ -1,0 +1,99 @@
+@mixin text-display {
+  // font-family: var(--font-primary); // SFPro-Display-Bold
+  font-size: 2rem; // 32px
+  line-height: 1.5; // 48px
+  letter-spacing: 0.025rem; // 0.4px
+  font-weight: bold;
+}
+
+@mixin text-headline {
+  // font-family: var(--font-primary); // SFPro-Display-Medium
+  font-size: 1.5rem; // 24px
+  line-height: 1.33; // 32px
+  font-weight: 500;
+}
+
+@mixin text-title {
+  // font-family: var(--font-primary); // SFPro-Display-Regular
+  font-size: 1.125rem; // 20px
+  line-height: 1.6; // 32px
+}
+
+@mixin text-subheader {
+  // font-family: var(--font-primary); // SFPro-Display-Regular
+  font-size: 1.125rem; // 18px
+  line-height: 1.78; // 32px
+  font-weight: 600;
+  letter-spacing: -0.05rem; // -0.8px
+}
+
+@mixin text-body-2 {
+  // font-family: var(--font-primary); // SFPro-Text-Medium
+  font-size: 0.875rem; // 14px
+  line-height: 1.71; // 24px
+  letter-spacing: -0.0125rem; // -0.2px
+  font-weight: 500;
+}
+
+@mixin text-body-1 {
+  // font-family: var(--font-primary); // SFPro-Text-Regular
+  font-size: 0.875rem; // 14px
+  line-height: 1.71; // 24px
+  letter-spacing: -0.0125rem; // -0.2px
+}
+
+@mixin text-system {
+  // font-family: var(--font-primary); // SFPro-Text-Regular
+  font-size: 0.8125rem; // 13px
+  line-height: 1.23; // 16px
+  letter-spacing: -0.04375rem; // -0.7px
+}
+
+@mixin text-action {
+  // font-family: var(--font-primary); // SFPro-Text-SemiBold
+  font-size: 0.75rem; // 12px
+  line-height: 1.33; // 16px
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@mixin text-caption-2 {
+  // font-family: var(--font-primary); // SFPro-Text-SemiBold
+  font-size: 0.75rem; // 12px
+  line-height: 1.33; // 16px
+  letter-spacing: -0.0125rem; // -0.2px
+  font-weight: 600;
+}
+
+@mixin text-caption-1 {
+  // font-family: var(--font-primary); // SFPro-Text-Regular
+  font-size: 0.75rem; // 12px
+  line-height: 1.33; // 16px
+  letter-spacing: -0.0125rem; // -0.2px
+}
+
+@mixin text-code-2 {
+  font-family: var(--font-code);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+@mixin text-code-1 {
+  font-family: var(--font-code);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+
+.a-body-text {
+  @include text-action;
+}
+
+.a-body-text {
+  @include text-action;
+}
+
+.a-body-text {
+  @include text-action;
+}
+
