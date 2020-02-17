@@ -5,7 +5,6 @@
 
 <script>
     import './Viewer.scss';
-import { log } from 'three';
 
     export default {
         name: 'Viewer',
@@ -14,6 +13,7 @@ import { log } from 'three';
                 hold: false,
                 ratio: 0.08,
                 hovering: false,
+                speed: 1500,
                 cursor: {
                     x: 0,
                     y: 0,
@@ -43,6 +43,14 @@ import { log } from 'three';
                 }
             }
         },
+        watch: {
+            'hovering': function () {
+                this.$store.commit("setHover", this.hovering);
+            },
+            'hold': function () {
+                this.$store.commit("setHold", this.hold);
+            }
+        },
         computed: {},
         methods: {
             init() {
@@ -50,7 +58,6 @@ import { log } from 'three';
                 this.setSizes()
 
                 this.initRenderer(this.$refs.viewer_wrapper)
-
 
                 this.setPosition()
 
@@ -60,21 +67,18 @@ import { log } from 'three';
             setCursor(_e) {
                 this.cursor.x = (_e.clientX / this.sizes.width)
                 this.cursor.y = (_e.clientY / this.sizes.height)
+
                 
             },
             startCursor(_e) {
                 this.cursor.startX = (_e.clientX / this.sizes.width)
                 this.cursor.startY = (_e.clientY / this.sizes.height)
-                console.log(this.cursor);
             },
             setDeltas() {
-                //this.cursor.deltaX = this.cursor.startX - this.cursor.x
-
                 this.cursor.deltaY = this.lerp(this.cursor.deltaY, this.cursor.startY - this.cursor.y, 0.1)
                 this.cursor.deltaX = this.lerp(this.cursor.deltaX, this.cursor.startX - this.cursor.x, 0.1)
                 this.cursor.startX = this.lerp(this.cursor.startX, this.cursor.x, 0.8)
                 this.cursor.startY = this.lerp(this.cursor.startY, this.cursor.y, 0.8)
-
             },
             resetDeltas() {
                 this.cursor.deltaY = 0
@@ -108,8 +112,8 @@ import { log } from 'three';
                 this.renderer.el.style.transform = `matrix(1, 0, 0, 1, ${this.renderer.pos.x}, ${this.renderer.pos.y})`
             },
             updateEndPostion() {
-                this.renderer.pos.endX -= this.cursor.deltaX * 1500;
-                this.renderer.pos.endY -= this.cursor.deltaY * 1500;
+                this.renderer.pos.endX -= this.cursor.deltaX * this.speed;
+                this.renderer.pos.endY -= this.cursor.deltaY * this.speed;
             },
             collisionDetection() {
 
@@ -204,6 +208,7 @@ import { log } from 'three';
 
             window.addEventListener('mousemove', (_event) => {
                 this.setCursor(_event)
+                this.speed = 1500
             })
 
             this.$refs.viewer_wrapper.addEventListener('mousedown', (_event) => {
@@ -222,6 +227,7 @@ import { log } from 'three';
 
             this.$refs.viewer_wrapper.addEventListener('touchmove', (_event) => {
                 this.setCursor(_event.touches[0])
+                this.speed = 500
             })
 
             this.$refs.viewer_wrapper.addEventListener('touchstart', (_event) => {
@@ -243,6 +249,8 @@ import { log } from 'three';
             this.init()
         },
         created() {
+            if(this.$store.state.loaded) this.setElements()
+            
             this.$store.subscribe((mutation, state) => {
                 if (mutation.type === 'setLoaded') {
                     this.setElements()

@@ -11,6 +11,8 @@ const storeConfig = {
     projects: [],
     homepage: [],
     loaded: false,
+    hovering: false,
+    hold: false,
   },
   mutations: {
     setProjects (state, payload) {
@@ -21,6 +23,12 @@ const storeConfig = {
     },
     setLoaded (state, payload) {
       state.loaded = payload
+    },
+    setHover (state, payload) {
+      state.hovering = payload
+    },
+    setHold (state, payload) {
+      state.hold = payload
     },
   },
   actions: {},

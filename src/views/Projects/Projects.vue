@@ -1,9 +1,7 @@
 <template>
     <div class="projects-container" ref="projects_container" >
         <Viewer />
-        <div v-for="(project) of this.$store.state.projects" v-bind:key="project.id">
-            {{ project }}
-        </div>
+        <Cursors />
     </div>
 </template>
 
@@ -11,11 +9,13 @@
     import './Projects.scss';
 
     import Viewer from '@Component/Viewer/Viewer.vue';
+    import Cursors from '@Component/Cursor/Cursor.vue';
 
     export default {
         name: 'Projects',
         components: {
-            Viewer
+            Viewer,
+            Cursors,
         },
         data() {
             return {
