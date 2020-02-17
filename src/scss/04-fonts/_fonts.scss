@@ -1,3 +1,74 @@
 /* ==|====================
    Fonts
    ======================= */
+@font-face {
+   font-family: 'Gotham Narrow';
+   src: url('../../assets/fonts/GothamNarrow-Thin.woff2') format('woff2'),
+         url('../../assets/fonts/GothamNarrow-Thin.woff') format('woff');
+   font-weight: 100;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Gotham';
+   src: url('../../assets/fonts/Gotham-Thin.woff2') format('woff2'),
+      url('../../assets/fonts/Gotham-Thin.woff') format('woff');
+   font-weight: 100;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Gotham Narrow Ultra';
+   src: url('../../assets/fonts/GothamNarrow-Ultra.woff2') format('woff2'),
+      url('../../assets/fonts/GothamNarrow-Ultra.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Gotham Narrow Book';
+   src: url('../../assets/fonts/GothamNarrow-Book.woff2') format('woff2'),
+      url('../../assets/fonts/GothamNarrow-Book.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Gotham Book';
+   src: url('../../assets/fonts/Gotham-Book.woff2') format('woff2'),
+      url('../../assets/fonts/Gotham-Book.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Gotham Ultra';
+   src: url('../../assets/fonts/Gotham-Ultra.woff2') format('woff2'),
+      url('../../assets/fonts/Gotham-Ultra.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Gotham Light';
+   src: url('../../assets/fonts/Gotham-Light.woff2') format('woff2'),
+      url('../../assets/fonts/Gotham-Light.woff') format('woff');
+   font-weight: 300;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Gotham Narrow';
+   src: url('../../assets/fonts/GothamNarrow-Black.woff2') format('woff2'),
+      url('../../assets/fonts/GothamNarrow-Black.woff') format('woff');
+   font-weight: 900;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'Gotham Medium';
+   src: url('../../assets/fonts/Gotham-Medium.woff2') format('woff2'),
+      url('../../assets/fonts/Gotham-Medium.woff') format('woff');
+   font-weight: 500;
+   font-style: normal;
+}

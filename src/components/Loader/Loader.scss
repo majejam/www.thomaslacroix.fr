@@ -1,0 +1,29 @@
+@import '@MasterStyle';
+
+:root {
+    --btn-color: var(--color-white);
+    --btn-background: var(--color-primary-500);
+    --btn-border: var(--color-white);
+}
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: var(--color-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--remove {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.loader-info {
+    color: var(--color-white);
+}

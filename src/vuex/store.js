@@ -2,9 +2,27 @@ const debug = process.env.NODE_ENV !== 'production';
 
 const storeConfig = {
   modules: {},
-  getters: {},
-  state: {},
-  mutations: {},
+  getters: {
+    projects: state => {
+      return state.projects
+    }
+  },
+  state: {
+    projects: [],
+    homepage: [],
+    loaded: false,
+  },
+  mutations: {
+    setProjects (state, payload) {
+      state.projects.push(payload) 
+    },
+    setHomepage (state, payload) {
+      state.homepage.push(payload)
+    },
+    setLoaded (state, payload) {
+      state.loaded = payload
+    },
+  },
   actions: {},
   strict: debug,
 };

@@ -46,7 +46,7 @@
 
                 this.setComposer()
 
-                this.setMeteorite(100)
+                this.setMeteorite(200)
                 
             },
             setCamera() {
@@ -158,6 +158,12 @@
 
                 window.addEventListener('mousemove', (_event) => {
                     this.setCursor(_event)
+                })
+
+                this.$refs.canvas_container.addEventListener('click', (_event) => {
+                    this.$router.push({
+                        name: 'Projects'
+                    })
                 })
 
                 this.init()

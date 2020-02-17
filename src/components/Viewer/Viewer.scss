@@ -1,0 +1,51 @@
+@import '@MasterStyle';
+
+.viewer-wrapper {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.viewer-container {
+    position: absolute;
+    background: var(--color-black);
+}
+
+.viewer-element {
+    position: absolute;
+    color: var(--color-white);
+    width: 350px;
+    user-select: none;
+    -webkit-user-drag: none;  
+
+    &-date {
+        user-select: none;
+        -webkit-user-drag: none;
+        @include text-headline;
+    }
+
+    &-title {
+        user-select: none;
+        -webkit-user-drag: none;    
+        @include text-display;
+    }
+
+    &-description {
+        user-select: none;
+        -webkit-user-drag: none;
+        color: var(--color-white);
+        @include text-paragraph;
+    }
+
+    &-image {
+        position: absolute;
+        top: -50%;
+        left: 50%;
+        z-index: -1;
+        -webkit-user-drag: none;
+        user-select: none;
+        width: 400px;
+        transform: translateZ(-100px);
+    }
+}

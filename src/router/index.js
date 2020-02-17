@@ -5,6 +5,8 @@ import { SiteName, TitleSeparator, RouterMode } from '@Config';
 
 import Index from '@View/Index.vue';
 
+import Projects from '@View/Projects/Projects.vue';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -14,6 +16,16 @@ const router = new Router({
       path: '/',
       name: 'Home',
       component: Index,
+      props: true,
+      meta: {
+        title: 'Accueil',
+      },
+    },
+    {
+      path: '/projects',
+      name: 'Projects',
+      component: Projects,
+      props: true,
       meta: {
         title: 'Accueil',
       },
