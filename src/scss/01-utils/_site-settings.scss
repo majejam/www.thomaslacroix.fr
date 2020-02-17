@@ -77,3 +77,20 @@ $mq-show-breakpoints: (mobile, mobileLandscape, tablet, desktop, wide);
 //  (min-device-pixel-ratio: 1.5),
 //  (min-resolution: 1.5ddpx)";
 
+
+.appear-enter-active {
+  transition-duration: 0.8s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.appear-leave-active {
+  transition-duration: 0.8s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.appear-enter,
+.appear-leave-active {
+  opacity: 0
+}

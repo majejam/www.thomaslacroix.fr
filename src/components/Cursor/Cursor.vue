@@ -11,9 +11,11 @@
             return {
                 mouse: true,
                 hover: false,
+                holding: false,
+                countdown: 100,
                 radius: {
-                    value: 15,
-                    target: 15,
+                    value: 8,
+                    target: 8,
                 },
                 context: '',
                 sizes: {
@@ -53,6 +55,8 @@
                 this.pos.endY = this.cursor.y;
                 this.contextUpdate()
 
+                 this.isHolding()
+
                 requestAnimationFrame(this.update);
             },
             lerp(min, max, fraction) {
@@ -61,7 +65,7 @@
             drawBall(x, y, radius) {
                 this.context.beginPath();
                 this.context.fillStyle = '#FFFFFF';
-                this.context.arc(x, y, radius, 0, 2 * Math.PI, false);
+                this.context.arc(x, y, radius * this.countdown/100, 0, 2 * Math.PI, false);
                 this.context.fill();
             },
             contextUpdate() {
@@ -75,22 +79,61 @@
                 this.sizes.width = this.$refs.canvas.width = window.innerWidth
                 this.sizes.height = this.$refs.canvas.height = window.innerHeight
             },
+            isHolding() {
+                if(this.holding && this.$route.name == "Home") {
+                    if(this.countdown > 0 ) {
+                        this.countdown -= 2
+                    }
+                    else if (this.countdown == 0) {
+                        this.routing()
+                    }
+                    
+                }
+                else {
+                    if(this.countdown < 100 ) {
+                        this.countdown += 2
+                    }
+                }
+            },
+            routing() {
+                if(this.$route.name == "Home") {
+                    this.$router.push({
+                        name: 'Projects'
+                    })
+                }
+            }
         },
         mounted() {
             this.init()
+
+            window.addEventListener('mousedown', () => {
+                this.holding = true
+            })
+
+            window.addEventListener('mouseup', () => {
+                this.holding = false
+            })
+
+            window.addEventListener('touchstart', () => {
+                this.holding = true
+            })
+
+            window.addEventListener('touchend', () => {
+                this.holding = false
+            })
         },
         created() {
  
             this.$store.subscribe((mutation, state) => {
                 if (mutation.type === 'setHover') {
-                    if(!this.$store.state.hold) this.$store.state.hovering ? this.radius.target = 50 : this.radius.target = 15
+                    if(!this.$store.state.hold) this.$store.state.hovering ? this.radius.target = 50 : this.radius.target = 8
                     
                 }
             });
 
             this.$store.subscribe((mutation, state) => {
                 if (mutation.type === 'setHold') {
-                    this.$store.state.hold ? this.radius.target = 10 : this.radius.target = 15
+                    this.$store.state.hold ? this.radius.target = 4 : this.radius.target = 8
                 }
             });
         }

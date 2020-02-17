@@ -1,14 +1,19 @@
 <template>
   <div class="app">
     <Loader :data.sync="this.loader" statistics @ended="hasEnded"/>
-    <keep-alive>
-      <router-view />
-    </keep-alive>
+    <Cursors />
+    
+    <transition name="appear" mode="out-in" @beforeLeave="beforeLeave" @enter="enter" @afterEnter="afterEnter">
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
 <script>
   import Loader from '@Component/Loader/Loader.vue';
+  import Cursors from '@Component/Cursor/Cursor.vue';
 
   import Vue from 'vue'
   import PrismicVue from 'prismic-vue'
@@ -22,7 +27,8 @@
   export default {
     name: 'App',
     components: {
-      Loader
+      Loader,
+      Cursors
     },
     data() {
       return {
@@ -76,6 +82,18 @@
       },
       hasEnded() {
         this.$store.commit("setLoaded", true);
+      },
+      beforeLeave() {
+        console.log('leaving..');
+        
+      },
+      enter() {
+        console.log('entering');
+        
+      },
+      afterEnter() {
+        console.log('all done');
+        
       }
     }
   };

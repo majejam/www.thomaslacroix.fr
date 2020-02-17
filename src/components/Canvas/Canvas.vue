@@ -160,12 +160,6 @@
                     this.setCursor(_event)
                 })
 
-                this.$refs.canvas_container.addEventListener('click', (_event) => {
-                    this.$router.push({
-                        name: 'Projects'
-                    })
-                })
-
                 this.init()
 
                 this.loop()

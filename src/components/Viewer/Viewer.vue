@@ -1,6 +1,5 @@
 <template>
-    <div class="viewer-wrapper" ref="viewer_wrapper">
-    </div>
+    <div class="viewer-wrapper" ref="viewer_wrapper"> </div>
 </template>
 
 <script>
@@ -53,6 +52,10 @@
         },
         computed: {},
         methods: {
+            enter() {
+                console.log('enter');
+                
+            },
             init() {
 
                 this.setSizes()
@@ -256,6 +259,6 @@
                     this.setElements()
                 }
             });
-        }
+        },
     };
 </script>

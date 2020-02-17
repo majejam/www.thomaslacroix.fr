@@ -24,6 +24,10 @@
     },
     methods: {
 
+    },
+    activated() {
+      
+      this.$store.commit("setHover", false);
     }
   };
 </script>
