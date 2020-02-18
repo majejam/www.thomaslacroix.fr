@@ -81,6 +81,17 @@
             z-index: 100;
         }
     }
+
+    &-links {
+        color: var(--color-white);
+        padding-top: 10px;
+
+        a {
+            color: var(--color-white);
+            margin-right: 10px;
+            cursor: none;
+        }
+    }
 }
 
 

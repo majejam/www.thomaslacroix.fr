@@ -162,17 +162,15 @@
             },
             setElement(project) {
                 let div = this.createElementWrapper(project)
+                console.log(project);
+                
 
                 div.appendChild(this.createDate(project.date[0].text))
                 div.appendChild(this.createTitle(project.title[0].text))
                 div.appendChild(this.createDescription(project.description[0].text))
                 div.appendChild(this.createImage(project.image.url, project.image.alt))
-                div.addEventListener('mouseover', () => {
-                    this.hovering = true
-                })
-                div.addEventListener('mouseleave', () => {
-                    this.hovering = false
-                })
+                div.appendChild(this.createLinks(project))
+                
                 this.renderer.el.appendChild(div)
             },
             createElementWrapper(project) {
@@ -197,6 +195,28 @@
                 let el = document.createElement('p')
                 el.classList.add('viewer-element-description')
                 el.innerText = inner
+                return el
+            },
+            createLinks(project) {
+                let el = document.createElement('div')
+                el.classList.add('viewer-element-links')
+                if(project.nom_du_projet) el.appendChild(this.createLink(project.project_link.url, project.project_link.target, project.nom_du_projet))
+                if(project.nom_github) el.appendChild(this.createLink(project.link_github.url, project.link_github.target, project.nom_github))
+                return el
+            },
+            createLink(url, target, inner) {
+                let el = document.createElement('a')
+                el.setAttribute('href', url)
+                el.setAttribute('target', target)
+                el.classList.add('viewer-element-link')
+                el.innerText = inner
+
+                el.addEventListener('mouseover', () => {
+                    this.hovering = true
+                })
+                el.addEventListener('mouseleave', () => {
+                    this.hovering = false
+                })
                 return el
             },
             createImage(inner, alt, isChild = true) {

@@ -11,6 +11,7 @@
         watch: {
             'scale': function () {
                 this.animatedIcon()
+                console.log(this.scale);
             }
         },
         data() {
@@ -21,13 +22,15 @@
         computed: {},
         methods: {
             animatedIcon() {
-                this.$refs.svg.style.strokeDashoffset = (1 / (this.scale) - 1) * 3300
-                if(this.scale) setTimeout(() => {
-                    this.$refs.svg.classList.add('faster')
+                this.$refs.svg.style.strokeDashoffset = ((1 / (this.scale) - 1) * 3100) + 200
+                if(this.scale == 1) {
                     setTimeout(() => {
-                        this.$emit('ended', this.elapsedTime)
-                    }, 1000);
-                }, 1500); 
+                        this.$refs.svg.classList.add('faster')
+                        setTimeout(() => {
+                            this.$emit('ended', this.elapsedTime)
+                        }, 1000);
+                    }, 1500); 
+                } 
             }
         },
         mounted() {

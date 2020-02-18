@@ -111,11 +111,11 @@
       getImagesLoaded() {
         this.images.forEach(image => {
           let objImg = new Image();
-          objImg.src = image
           objImg.onload = () => {
             this.loader.elements++
             this.loader.value = ((this.loader.elements / this.images.length) / 2) + 0.5 
           }
+          objImg.src = image
         });
       },
       finishedCalls() {
