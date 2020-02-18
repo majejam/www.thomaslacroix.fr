@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import { SiteName, TitleSeparator, RouterMode } from '@Config';
 
-import Index from '@View/Index.vue';
+import Index from '@View/Index/Index.vue';
 
 import Projects from '@View/Projects/Projects.vue';
 

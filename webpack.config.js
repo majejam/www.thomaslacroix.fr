@@ -104,7 +104,7 @@ const config = {
   }
 };
 
-if (minify) {
+if (false) {
   config.optimization.minimizer = [
     new UglifyJsPlugin({
       cache: true,
