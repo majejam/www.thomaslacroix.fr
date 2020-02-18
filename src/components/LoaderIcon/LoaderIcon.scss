@@ -1,0 +1,18 @@
+@import '@MasterStyle';
+
+
+svg {
+    width: 100px;
+    height: 100px;
+    stroke: white;
+    fill: none;
+    stroke-width: 12px;
+    stroke-dasharray: 3300;
+    stroke-dashoffset: 3300;
+    transition: 1.5s linear all;
+}
+
+.faster {
+    stroke-dashoffset: -3300 !important;
+    transition: 1s ease-in all;
+}

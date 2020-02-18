@@ -10,6 +10,7 @@
 .viewer-container {
     position: absolute;
     background: var(--color-black);
+    will-change: transform;
 }
 
 .viewer-element {
@@ -48,6 +49,37 @@
         width: 400px;
         opacity: 0.7;
         transform: translateZ(-100px);
+    }
+
+    &-tutorial {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        text-align: center;
+        opacity: 1;
+        transition: 0.2s ease-in opacity;
+        transition-delay: 1s;
+        will-change: opacity;
+        user-select: none;
+        -webkit-user-drag: none;
+        z-index: 100;
+
+        @include text-subheader;
+
+        &--hide {
+            opacity: 0;
+        }
+
+        p {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 100%;
+            z-index: 100;
+        }
     }
 }
 

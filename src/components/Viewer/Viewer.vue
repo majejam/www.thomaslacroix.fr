@@ -1,9 +1,13 @@
 <template>
-    <div class="viewer-wrapper" ref="viewer_wrapper"> </div>
+    <div class="viewer-wrapper" ref="viewer_wrapper">
+    </div>
 </template>
 
 <script>
     import './Viewer.scss';
+    import Vue from 'vue';
+
+    
 
     export default {
         name: 'Viewer',
@@ -13,6 +17,10 @@
                 ratio: 0.08,
                 hovering: false,
                 speed: 1500,
+                tutorial: {
+                    hide: false,
+                    el: null,
+                },
                 cursor: {
                     x: 0,
                     y: 0,
@@ -48,17 +56,22 @@
             },
             'hold': function () {
                 this.$store.commit("setHold", this.hold);
+                this.tutorial.hide = true
+            },
+            'tutorial.hide': function () {
+                if(this.tutorial.hide) this.tutorialHide()
             }
         },
         computed: {},
         methods: {
             init() {
-
+                
                 this.setSizes()
 
                 this.initRenderer(this.$refs.viewer_wrapper)
 
                 this.setPosition()
+                
 
                 this.loop()
 
@@ -93,6 +106,7 @@
             },
             initRenderer(parent) {
                 this.renderer.el.classList.add(this.renderer.class)
+                this.renderer.el.setAttribute('id', 'renderer')
                 parent.appendChild(this.renderer.el)
                 this.setRendererSize()
             },
@@ -144,6 +158,7 @@
                 this.$store.state.projects.forEach(project => {
                     this.setElement(project)
                 });
+                this.createTutorial(this.$store.state.tutorial, 'YESS')
             },
             setElement(project) {
                 let div = this.createElementWrapper(project)
@@ -184,13 +199,24 @@
                 el.innerText = inner
                 return el
             },
-            createImage(inner, alt) {
+            createImage(inner, alt, isChild = true) {
                 let el = document.createElement('img')
-                el.classList.add('viewer-element-image')
+                if(isChild) el.classList.add('viewer-element-image')
                 el.setAttribute('src', inner)
                 el.setAttribute('alt', alt)
                 el.setAttribute('draggable', false)
                 return el
+            },
+            createTutorial(inner, alt) {
+                this.tutorial.el = document.createElement('div')
+                this.tutorial.el.appendChild(this.createImage(inner, 'Move & hold the mouse !', false))
+                this.tutorial.el.appendChild(this.createDescription('Move & hold the mouse !'))
+                this.tutorial.el.classList.add('viewer-element-tutorial')
+                this.renderer.el.appendChild(this.tutorial.el)
+                
+            },
+            tutorialHide() {
+                this.tutorial.el.classList.add('viewer-element-tutorial--hide')
             }
         },
         mounted() {

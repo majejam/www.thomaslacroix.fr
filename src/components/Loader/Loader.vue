@@ -1,14 +1,18 @@
 <template>
     <div class="loader-container" ref="loader_container">
-        <span class="loader-info">{{ data.value * 100 }} %</span>
+        <LoaderIcon :scale="data.value" @ended="removeLoader"/>
     </div>
 </template>
 
 <script>
     import './Loader.scss';
+    import LoaderIcon from '@Component/LoaderIcon/LoaderIcon.vue';
 
     export default {
         name: 'Loader',
+        components: {
+            LoaderIcon,
+        },
         props: {
             statistics: {
                 required: false,
@@ -20,7 +24,6 @@
             'data.value': function () {
                 if (this.data.value == 1) {
                     this.hasFinished()
-                    this.removeLoader()
                 }
             }
         },
@@ -42,7 +45,10 @@
                 this.$emit('ended', this.elapsedTime)
             },
             removeLoader() {
-                this.$refs.loader_container.classList.add('loader-container--remove')
+                this.$refs.loader_container.classList.add('loader-container--opacity')
+                setTimeout(() => {
+                    this.$refs.loader_container.classList.add('loader-container--remove')
+                }, 550);
             },
             getStatistics() {
                 console.group('Loader statistics')

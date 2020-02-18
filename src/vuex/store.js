@@ -10,6 +10,7 @@ const storeConfig = {
   state: {
     projects: [],
     homepage: [],
+    tutorial: '',
     loaded: false,
     hovering: false,
     hold: false,
@@ -21,6 +22,9 @@ const storeConfig = {
     },
     setHomepage (state, payload) {
       state.homepage.push(payload)
+    },
+    setTutorial (state, payload) {
+      state.tutorial = payload 
     },
     setLoaded (state, payload) {
       state.loaded = payload

@@ -17,9 +17,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.5s ease-in-out opacity;
+
+    &--opacity {
+        opacity: 0;
+    }
 
     &--remove {
-        opacity: 0;
         display: none;
     }
 }
