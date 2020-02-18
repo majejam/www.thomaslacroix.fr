@@ -11,7 +11,7 @@
 
     export default {
         name: 'Canvas',
-        props: {},
+        props: ['fov'],
         data() {
             return {
                 cursor: {
@@ -141,7 +141,7 @@
             updateCameraPosition() {
                 this.camera.position.x = this.lerp(this.camera.position.x, (this.cursor.x * 2 - 1) * 700, 0.04)
                 this.camera.position.y = this.lerp(this.camera.position.y, (-this.cursor.y * 2 + 1) * 700, 0.04)
-                this.camera.lookAt(new THREE.Vector3(0,0,-5000));
+                this.camera.lookAt(new THREE.Vector3(0,0,-this.fov));
             },
             loop() {
                 this.composer.render(this.clock.getDelta())

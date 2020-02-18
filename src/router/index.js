@@ -7,6 +7,8 @@ import Index from '@View/Index/Index.vue';
 
 import Projects from '@View/Projects/Projects.vue';
 
+import NotFound from '@View/NotFound/NotFound.vue';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -30,6 +32,15 @@ const router = new Router({
         title: 'Projects',
       },
     },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound,
+      props: true,
+      meta: {
+        title: 'Uh oh',
+      },
+  },
   ],
 });
 

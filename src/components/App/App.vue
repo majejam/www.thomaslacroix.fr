@@ -4,7 +4,7 @@
     <Cursors />
 
     <transition name="appear" mode="out-in">
-      <keep-alive>
+      <keep-alive exclude="NotFound">
         <router-view />
       </keep-alive>
     </transition>

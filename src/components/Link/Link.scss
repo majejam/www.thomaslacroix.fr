@@ -1,0 +1,11 @@
+@import '@MasterStyle';
+
+
+.Link-container {
+    display: inline;
+
+    a {
+        cursor: none;
+        user-select: none;
+    }
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="page-content">
-    <Canvas />
+    <Canvas fov="5000" />
   </div>
 </template>
 
