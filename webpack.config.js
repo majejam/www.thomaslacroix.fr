@@ -15,6 +15,9 @@ const config = {
   output: {
     publicPath: ''
   },
+  devServer: {
+    historyApiFallback: true
+  },
   serve: {
     host: 'localhost',
     port: 3000

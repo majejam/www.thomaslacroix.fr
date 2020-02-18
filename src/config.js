@@ -2,11 +2,11 @@
  * ROUTER PART
  */
 // Used for the routes title
-export const SiteName = 'Default Site Name';
+export const SiteName = 'Thomas Lacroix';
 export const TitleSeparator = ' - ';
 
 // Vue Router Mode config
-export const RouterMode = 'hash';
+export const RouterMode = 'history';
 
 /**
  * API PART
@@ -27,5 +27,5 @@ export const APIConfig = {
  * GOOGLE ANALYTICS PART
  */
 export const enableAnalytics = true;
-export const analyticsKey = 'UA-XXX-X';
+export const analyticsKey = 'UA-109303937-1';
 export const disableAnalyticsInDebug = true;

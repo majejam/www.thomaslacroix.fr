@@ -4,8 +4,7 @@
     width: 100%;
     height: 100vh;
     position: relative;
-    transition: all 1.5s ease-out;
-    transition-delay: 0.5s;
+    transition: all 0.8s cubic-bezier(1,.48,.24,1);
 }
 
 .viewer-container {
@@ -54,12 +53,12 @@
 
 
 .appear-enter .viewer-wrapper{
-    transform: scale(0.6);
-    transition-delay: 0.5s;
+    transform: scale(0.4);
+    transition-delay: 0.1s;
 }
 
 .appear-leave-active .viewer-wrapper{
     transform: scale(0.4);
-    transition: all 1s ease-in;
+    transition: all 1s cubic-bezier(.63,-0.2,0,.63);
     transition-delay: 0s;
 }

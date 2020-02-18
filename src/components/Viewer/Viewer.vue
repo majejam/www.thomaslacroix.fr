@@ -52,10 +52,6 @@
         },
         computed: {},
         methods: {
-            enter() {
-                console.log('enter');
-                
-            },
             init() {
 
                 this.setSizes()
@@ -70,8 +66,6 @@
             setCursor(_e) {
                 this.cursor.x = (_e.clientX / this.sizes.width)
                 this.cursor.y = (_e.clientY / this.sizes.height)
-
-                
             },
             startCursor(_e) {
                 this.cursor.startX = (_e.clientX / this.sizes.width)
@@ -84,10 +78,7 @@
                 this.cursor.startY = this.lerp(this.cursor.startY, this.cursor.y, 0.8)
             },
             resetDeltas() {
-                this.cursor.deltaY = 0
-                this.cursor.deltaX = 0
-                this.cursor.startX = 0
-                this.cursor.startY = 0
+                this.cursor.deltaY = this.cursor.deltaX = this.cursor.startX = this.cursor.startY = 0
             },
             setSizes() {
                 this.sizes.width = window.innerWidth
@@ -128,7 +119,6 @@
                     this.renderer.pos.endX = this.renderer.pos.endX + 5
                 }
 
-
                 if (this.renderer.pos.y > 0) {
                     this.renderer.pos.endY = this.renderer.pos.endY - 5
                 }
@@ -136,6 +126,7 @@
                 if (this.renderer.pos.y < (this.sizes.height - this.renderer.sizes.height)) {
                     this.renderer.pos.endY = this.renderer.pos.endY + 5
                 }
+
             },
             loop() {
                 if (this.hold) {
@@ -155,14 +146,13 @@
                 });
             },
             setElement(project) {
-                console.log(project);
                 let div = this.createElementWrapper(project)
 
                 div.appendChild(this.createDate(project.date[0].text))
                 div.appendChild(this.createTitle(project.title[0].text))
                 div.appendChild(this.createDescription(project.description[0].text))
                 div.appendChild(this.createImage(project.image.url, project.image.alt))
-                div.addEventListener('mouseenter', () => {
+                div.addEventListener('mouseover', () => {
                     this.hovering = true
                 })
                 div.addEventListener('mouseleave', () => {
@@ -202,9 +192,9 @@
                 el.setAttribute('draggable', false)
                 return el
             }
-
         },
         mounted() {
+
             window.addEventListener('resize', () => {
                 this.setSizes()
             })
@@ -248,16 +238,13 @@
                 this.resetDeltas()
             })
 
-
             this.init()
         },
         created() {
             if(this.$store.state.loaded) this.setElements()
             
             this.$store.subscribe((mutation, state) => {
-                if (mutation.type === 'setLoaded') {
-                    this.setElements()
-                }
+                if (mutation.type === 'setLoaded') this.setElements()
             });
         },
     };

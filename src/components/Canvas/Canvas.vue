@@ -30,6 +30,9 @@
                 composer: '',
                 effectPassGlitch: new POST.EffectPass(this.camera, new POST.GlitchEffect()),
                 meteorites: [],
+                hold: false,
+                speed: 10,
+                baseSpeed: 10
             }
         },
         computed: {},
@@ -119,21 +122,34 @@
             updateMeteorite() {
                 this.meteorites.forEach(meteorite => {
                     meteorite.rotation.y = meteorite.rotation.x = meteorite.rotation.z += 0.01
-                    meteorite.position.z += 5 //speed
+                    meteorite.position.z += this.speed //speed
                     if (meteorite.position.z > 200) {
                         meteorite.position.z = (10000 + (Math.random() * 100)) * -1
                     }
                 })
             },
+            speedUp() {
+                this.speed = this.lerp(this.speed, 200, 0.01)
+                this.camera.fov = this.lerp(this.camera.fov, 185, 0.02)
+                this.camera.updateProjectionMatrix();
+            },
+            slowDown() {
+                this.speed = this.lerp(this.speed, this.baseSpeed, 0.02)
+                if(this.$route.name == "Home") this.camera.fov = this.lerp(this.camera.fov, 175, 0.02)
+                if(this.camera.fov > 175.1) this.camera.updateProjectionMatrix();
+            },
             updateCameraPosition() {
-                this.camera.position.x = this.lerp(this.camera.position.x, (this.cursor.x * 2 - 1) * 700, 0.05)
-                this.camera.position.y = this.lerp(this.camera.position.y, (-this.cursor.y * 2 + 1) * 700, 0.05)
+                this.camera.position.x = this.lerp(this.camera.position.x, (this.cursor.x * 2 - 1) * 700, 0.04)
+                this.camera.position.y = this.lerp(this.camera.position.y, (-this.cursor.y * 2 + 1) * 700, 0.04)
+                this.camera.lookAt(new THREE.Vector3(0,0,-5000));
             },
             loop() {
                 this.composer.render(this.clock.getDelta())
 
                 this.updateMeteorite()
 
+                this.hold ? this.speedUp() : this.slowDown()
+                
                 this.updateCameraPosition()
 
                 this.renderer.render(this.scene, this.camera)
@@ -163,6 +179,13 @@
                 this.init()
 
                 this.loop()
+        },
+        created() {
+            this.$store.subscribe((mutation, state) => {
+                if (mutation.type === 'setHolding') {
+                    this.hold = this.$store.state.holding
+                }
+            });
         }
     };
 

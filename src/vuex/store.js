@@ -13,6 +13,7 @@ const storeConfig = {
     loaded: false,
     hovering: false,
     hold: false,
+    holding: false,
   },
   mutations: {
     setProjects (state, payload) {
@@ -29,6 +30,9 @@ const storeConfig = {
     },
     setHold (state, payload) {
       state.hold = payload
+    },
+    setHolding (state, payload) {
+      state.holding = payload
     },
   },
   actions: {},

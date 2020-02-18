@@ -23,7 +23,6 @@
 
         },
         mounted() {
-            console.log(this.$store.state.projects)
         }
     };
 </script>

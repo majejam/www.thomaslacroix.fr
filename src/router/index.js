@@ -18,7 +18,7 @@ const router = new Router({
       component: Index,
       props: true,
       meta: {
-        title: 'Accueil',
+        title: 'Home',
       },
     },
     {
@@ -27,7 +27,7 @@ const router = new Router({
       component: Projects,
       props: true,
       meta: {
-        title: 'Accueil',
+        title: 'Projects',
       },
     },
   ],

@@ -12,6 +12,12 @@
                 mouse: true,
                 hover: false,
                 holding: false,
+                pulsating: true,
+                pulse: {
+                    time: 0,
+                    alpha: 1,
+                    play: false
+                },
                 countdown: 100,
                 radius: {
                     value: 8,
@@ -35,6 +41,11 @@
             }
         },
         computed: {},
+        watch: {
+            'holding': function () {
+                this.$store.commit("setHolding", this.holding);
+            }
+        },
         methods: {
             init() {
                 setTimeout(() => {
@@ -54,9 +65,9 @@
                 this.pos.endX = this.cursor.x;
                 this.pos.endY = this.cursor.y;
                 this.contextUpdate()
-
-                 this.isHolding()
-
+                if(this.pulsating) this.setPulse()
+                this.isHolding()
+                
                 requestAnimationFrame(this.update);
             },
             lerp(min, max, fraction) {
@@ -86,14 +97,36 @@
                     }
                     else if (this.countdown == 0) {
                         this.routing()
+                        this.pulse.play = true
                     }
-                    
                 }
                 else {
                     if(this.countdown < 100 ) {
                         this.countdown += 2
                     }
                 }
+            },
+            drawPulse(x, y, pulsating, alpha) {
+                this.context.beginPath();
+                this.context.save()
+                this.context.globalAlpha = alpha;
+                this.context.fillStyle = '#FFFFFF';
+                this.context.arc(x, y, 8 * pulsating, 0, 2 * Math.PI, false);
+                this.context.fill();
+                this.context.restore()
+            },
+            setPulse() {
+                if(this.pulse.play) {
+                    this.pulse.time += 0.2
+                    this.pulse.alpha -= 0.04
+                    if(this.pulse.alpha < 0.01) this.resetPulse() 
+                    this.drawPulse(this.pos.x, this.pos.y, this.pulse.time, this.pulse.alpha)
+                }
+            },
+            resetPulse() {
+                this.pulse.time = 0
+                this.pulse.alpha = 1
+                this.pulse.play = false
             },
             routing() {
                 if(this.$route.name == "Home") {
@@ -129,9 +162,7 @@
                     if(!this.$store.state.hold) this.$store.state.hovering ? this.radius.target = 50 : this.radius.target = 8
                     
                 }
-            });
 
-            this.$store.subscribe((mutation, state) => {
                 if (mutation.type === 'setHold') {
                     this.$store.state.hold ? this.radius.target = 4 : this.radius.target = 8
                 }

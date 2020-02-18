@@ -3,7 +3,7 @@
     <Loader :data.sync="this.loader" statistics @ended="hasEnded"/>
     <Cursors />
     
-    <transition name="appear" mode="out-in" @beforeLeave="beforeLeave" @enter="enter" @afterEnter="afterEnter">
+    <transition name="appear" mode="out-in">
       <keep-alive>
         <router-view />
       </keep-alive>
@@ -83,18 +83,6 @@
       hasEnded() {
         this.$store.commit("setLoaded", true);
       },
-      beforeLeave() {
-        console.log('leaving..');
-        
-      },
-      enter() {
-        console.log('entering');
-        
-      },
-      afterEnter() {
-        console.log('all done');
-        
-      }
     }
   };
 </script>
