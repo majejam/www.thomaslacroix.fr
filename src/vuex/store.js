@@ -5,6 +5,12 @@ const storeConfig = {
   getters: {
     projects: state => {
       return state.projects
+    },
+    homepage: state => {
+      return state.homepage
+    },
+    mobile: state => {
+      return state.mobile
     }
   },
   state: {
@@ -15,6 +21,7 @@ const storeConfig = {
     hovering: false,
     hold: false,
     holding: false,
+    mobile: false,
   },
   mutations: {
     setProjects (state, payload) {
@@ -37,6 +44,9 @@ const storeConfig = {
     },
     setHolding (state, payload) {
       state.holding = payload
+    },
+    setMobile (state, payload) {
+      state.mobile = payload
     },
   },
   actions: {},

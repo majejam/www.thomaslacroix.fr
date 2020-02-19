@@ -1,7 +1,7 @@
 <template>
     <div class="CloseButton-container" ref="CloseButton_container">
         <router-link :to="{ name: 'Home'}">
-    </router-link>
+        </router-link>
     </div>
 </template>
 

@@ -48,13 +48,11 @@
         },
         methods: {
             init() {
-                setTimeout(() => {
-                    this.context = this.$refs.canvas.getContext('2d')
-                    this.resize()
-                    this.pos.y = document.body.offsetHeight - 150
-                    this.pos.endY = 150
-                    this.update()
-                }, 1000);
+                this.context = this.$refs.canvas.getContext('2d')
+                this.resize()
+                this.pos.y = document.body.offsetHeight - 150
+                this.pos.endY = 150
+                this.update()
                 window.addEventListener('resize', this.resize);
                 window.addEventListener('mousemove', (_event) => {
                     this.cursor.x = _event.clientX
@@ -89,6 +87,9 @@
             resize() {
                 this.sizes.width = this.$refs.canvas.width = window.innerWidth
                 this.sizes.height = this.$refs.canvas.height = window.innerHeight
+                
+                this.$store.getters.mobile ? this.$refs.canvas.style.display = 'none' : this.$refs.canvas.style.display = 'block'
+                
             },
             isHolding() {
                 if(this.holding && this.$route.name == "Home") {

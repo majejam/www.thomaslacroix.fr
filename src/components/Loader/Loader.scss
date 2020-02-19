@@ -12,11 +12,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 100;
+    z-index: 1000;
     background: var(--color-black);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: column;
     transition: 0.5s ease-in-out opacity;
 
     &--opacity {
@@ -25,6 +26,16 @@
 
     &--remove {
         display: none;
+    }
+
+    &-tips {
+        padding-top: 5px;
+        transition: 0.2s ease-in-out opacity;
+        @include text-headline;
+    }
+
+    &--opacity &-tips {
+        opacity: 0;
     }
 }
 

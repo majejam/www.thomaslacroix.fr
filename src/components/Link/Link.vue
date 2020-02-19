@@ -1,6 +1,7 @@
 <template>
     <div class="Link-container" ref="link_container">
-        <router-link  :to="{ name: this.path}" :class="this.type" >{{ this.content }}</router-link>
+        <router-link v-if="this.path" :to="{name:this.path}" :class="this.type" >{{ this.content }}</router-link>
+        <a v-if="this.external" :href="this.external" :class="this.type" target="_blank" rel="noopener noreferrer">{{ this.content }}</a>
     </div>
 </template>
 
@@ -19,7 +20,11 @@
                 type: String,
             },
             path: {
-                required: true,
+                required: false,
+                type: String,
+            },
+            external: {
+                required: false,
                 type: String,
             }
         },

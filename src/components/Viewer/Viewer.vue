@@ -83,6 +83,7 @@
             startCursor(_e) {
                 this.cursor.startX = (_e.clientX / this.sizes.width)
                 this.cursor.startY = (_e.clientY / this.sizes.height)
+
             },
             setDeltas() {
                 this.cursor.deltaY = this.lerp(this.cursor.deltaY, this.cursor.startY - this.cursor.y, 0.1)
@@ -162,8 +163,6 @@
             },
             setElement(project) {
                 let div = this.createElementWrapper(project)
-                console.log(project);
-                
 
                 div.appendChild(this.createDate(project.date[0].text))
                 div.appendChild(this.createTitle(project.title[0].text))
@@ -248,11 +247,12 @@
             window.addEventListener('mousemove', (_event) => {
                 this.setCursor(_event)
                 this.speed = 1500
+                
             })
 
             this.$refs.viewer_wrapper.addEventListener('mousedown', (_event) => {
-                this.hold = true
-                this.startCursor(_event)
+                 this.hold = true
+                 this.startCursor(_event)
             })
 
             this.$refs.viewer_wrapper.addEventListener('mouseleave', (_event) => {
@@ -266,10 +266,11 @@
 
             this.$refs.viewer_wrapper.addEventListener('touchmove', (_event) => {
                 this.setCursor(_event.touches[0])
-                this.speed = 500
+                this.speed = 1200
             })
 
             this.$refs.viewer_wrapper.addEventListener('touchstart', (_event) => {
+                this.setCursor(_event.touches[0])
                 this.hold = true
                 this.startCursor(_event.touches[0])
             })

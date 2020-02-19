@@ -25,17 +25,23 @@ html {
   text-align: left;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
 }
 
 body,
 html {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin: 0;
   padding: 0;
   color: var(--color-white);
   background: var(--color-black);
+  overscroll-behavior: none;
   cursor: none;
+}
+
+.app {
+  height: 100%;
 }
 
 // ---------------------------------

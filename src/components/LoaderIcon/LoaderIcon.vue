@@ -11,7 +11,6 @@
         watch: {
             'scale': function () {
                 this.animatedIcon()
-                console.log(this.scale);
             }
         },
         data() {

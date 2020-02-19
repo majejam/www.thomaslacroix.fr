@@ -27,10 +27,18 @@
   letter-spacing: -0.05rem; // -0.8px
 }
 
-@mixin text-body-2 {
-  // font-family: var(--font-primary); // SFPro-Text-Medium
-  font-size: 0.875rem; // 14px
-  line-height: 1.71; // 24px
+@mixin text-subheader-home {
+  font-family: var(--font-light); // SFPro-Display-Regular
+  font-size: 1.125rem; // 18px
+  line-height: 1.78; // 32px
+  font-weight: 400;
+  letter-spacing: -0.01rem; // -0.8px
+}
+
+@mixin text-header {
+   font-family: var(--font-primary); // SFPro-Text-Medium
+  font-size: 2.2rem; // 26px
+  line-height: 1.2; // 24px
   letter-spacing: -0.0125rem; // -0.2px
   font-weight: 500;
 }

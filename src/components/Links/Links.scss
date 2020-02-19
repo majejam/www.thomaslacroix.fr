@@ -1,0 +1,48 @@
+@import '@MasterStyle';
+
+
+.Links-container {
+    display: inline;
+
+    a {
+        cursor: none;
+        user-select: none;
+    }
+}
+
+.Links {
+    &-container {
+        position: absolute;
+        width: 100%;
+        padding: 20px 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        bottom: 0;
+        user-select: none;
+        -webkit-user-drag: none;
+
+        @include mq($from: tablet, $until: desktop) {
+            padding: 20px 10%;
+        }
+
+        @include mq($from: mobile, $until: tablet) {
+            justify-content: space-evenly;
+            flex-flow: wrap;
+            padding: 20px 5%;
+        }
+
+    }
+
+    &-link {
+        color: white;
+        text-decoration: none;
+        padding: 2px 8px;
+        @include text-headline;
+
+        @include mq($from: mobile, $until: tablet) {
+            font-size: 0.8em;
+        }
+
+    }
+}
