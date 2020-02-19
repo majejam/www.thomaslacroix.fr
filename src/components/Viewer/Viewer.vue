@@ -244,6 +244,10 @@
                 this.setSizes()
             })
 
+            document.addEventListener('dragstart', function (e) {
+                e.preventDefault();
+            });
+
             window.addEventListener('mousemove', (_event) => {
                 this.setCursor(_event)
                 this.speed = 1500

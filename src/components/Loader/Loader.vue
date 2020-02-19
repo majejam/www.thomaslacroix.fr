@@ -1,7 +1,7 @@
 <template>
     <div class="loader-container" ref="loader_container">
         <LoaderIcon :scale="data.value" @ended="removeLoader"/>
-        <span class="loader-container-tips">Hold or drag to naviguate</span>
+        <span class="loader-container-tips">Hold or drag to navigate</span>
     </div>
 </template>
 
