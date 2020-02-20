@@ -17,6 +17,7 @@
                 ratio: 0.08,
                 hovering: false,
                 speed: 1500,
+                debug: window.location.hash === '#debug',
                 tutorial: {
                     hide: false,
                     el: null,
@@ -38,8 +39,9 @@
                     el: document.createElement('div'),
                     class: ['viewer-container'],
                     sizes: {
-                        width: 5000,
-                        height: 5000,
+                        width: 7000,
+                        height: 3000,
+                        scale: 1,
                     },
                     pos: {
                         x: 0,
@@ -72,6 +74,7 @@
 
                 this.setPosition()
                 
+                if(this.debug) this.debugShow()
 
                 this.loop()
 
@@ -97,6 +100,7 @@
             setSizes() {
                 this.sizes.width = window.innerWidth
                 this.sizes.height = window.innerHeight
+                this.sizes.width > 900 ? this.renderer.sizes.scale = 1 : this.renderer.sizes.scale = 0.6
             },
             setPosition() {
                 this.renderer.pos.x = this.renderer.pos.endX = -(this.renderer.sizes.width - this.sizes.width) / 2
@@ -118,7 +122,7 @@
             updateRendererPosition() {
                 this.renderer.pos.x = this.lerp(this.renderer.pos.x, this.renderer.pos.endX, this.ratio);
                 this.renderer.pos.y = this.lerp(this.renderer.pos.y, this.renderer.pos.endY, this.ratio);
-                this.renderer.el.style.transform = `matrix(1, 0, 0, 1, ${this.renderer.pos.x}, ${this.renderer.pos.y})`
+                this.renderer.el.style.transform = `matrix(${this.renderer.sizes.scale}, 0, 0, ${this.renderer.sizes.scale}, ${this.renderer.pos.x}, ${this.renderer.pos.y})`
             },
             updateEndPostion() {
                 this.renderer.pos.endX -= this.cursor.deltaX * this.speed;
@@ -167,14 +171,15 @@
                 div.appendChild(this.createDate(project.date[0].text))
                 div.appendChild(this.createTitle(project.title[0].text))
                 div.appendChild(this.createDescription(project.description[0].text))
-                div.appendChild(this.createImage(project.image.url, project.image.alt))
+                div.appendChild(this.createImageCover(project.image.url, project.image.alt))
                 div.appendChild(this.createLinks(project))
-                
+                if(this.debug) div.appendChild(this.createDebug(`${project.position_x}%,${project.position_y}%`))
                 this.renderer.el.appendChild(div)
             },
             createElementWrapper(project) {
                 let el = document.createElement('div')
                 el.classList.add('viewer-element')
+                if(this.debug) el.classList.add('viewer-element--debug')
                 el.style.transform = `translate(${(project.position_x/100) * this.renderer.sizes.width}px, ${(project.position_y/100) * this.renderer.sizes.height}px)`;
                 return el
             },
@@ -226,6 +231,16 @@
                 el.setAttribute('draggable', false)
                 return el
             },
+            createImageCover(inner, alt, isChild = true) {
+                let container = document.createElement('div')
+                let el = document.createElement('img')
+                if(isChild) container.classList.add('viewer-element-image')
+                el.setAttribute('src', inner)
+                el.setAttribute('alt', alt)
+                el.setAttribute('draggable', false)
+                container.appendChild(el)
+                return container
+            },
             createTutorial(inner, alt) {
                 this.tutorial.el = document.createElement('div')
                 this.tutorial.el.appendChild(this.createImage(inner, 'Move & hold the mouse !', false))
@@ -234,8 +249,29 @@
                 this.renderer.el.appendChild(this.tutorial.el)
                 
             },
+            createDebug(inner){
+                let el = document.createElement('span')
+                el.classList.add('viewer-element-span--debug')
+                el.innerText = inner
+                return el
+            },
             tutorialHide() {
                 this.tutorial.el.classList.add('viewer-element-tutorial--hide')
+            },
+            debugShow() {
+                for (let x = 0; x < 100; x +=10) {
+                    for (let y = 0; y < 100; y+=10) {
+                        let el = document.createElement('div')
+                        el.classList.add('viewer-element-debug')
+                        let span = document.createElement('span')
+                        span.innerText = `${x}%,${y}%`
+                        el.style.transform = `translate(${x * 70}px,${y * 30}px)`
+                        el.style.background = `rgba(255,0,0,${Math.random()/2})`
+                        el.appendChild(span)
+                        this.renderer.el.appendChild(el)
+                    }
+                    
+                }
             }
         },
         mounted() {
