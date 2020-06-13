@@ -32,8 +32,6 @@
             setHomepage() {
                 this.homepage = this.$store.getters.homepage
                 
-                console.log(this.$store.getters.homepage);
-                
                 this.header = this.homepage[0].name[0].text
                 this.subheader = this.homepage[0].title[0].text
                 this.description = this.homepage[0].description[0].text

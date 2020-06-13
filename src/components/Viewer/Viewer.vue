@@ -39,8 +39,8 @@
                     el: document.createElement('div'),
                     class: ['viewer-container'],
                     sizes: {
-                        width: 7000,
-                        height: 3000,
+                        width: 4500,
+                        height: 2250,
                         scale: 1,
                     },
                     pos: {
@@ -126,24 +126,24 @@
             },
             updateEndPostion() {
                 this.renderer.pos.endX -= this.cursor.deltaX * this.speed;
-                this.renderer.pos.endY -= this.cursor.deltaY * this.speed;
+                this.renderer.pos.endY -= this.cursor.deltaY * this.speed/1.3;
             },
             collisionDetection() {
 
                 if (this.renderer.pos.x > 0) {
-                    this.renderer.pos.endX = this.renderer.pos.endX - 5
+                    this.renderer.pos.endX = this.lerp(this.renderer.pos.endX, 0, this.ratio)
                 }
 
                 if (this.renderer.pos.x < (this.sizes.width - this.renderer.sizes.width)) {
-                    this.renderer.pos.endX = this.renderer.pos.endX + 5
+                    this.renderer.pos.endX = this.lerp(this.renderer.pos.endX, (this.sizes.width - this.renderer.sizes.width), this.ratio);
                 }
 
                 if (this.renderer.pos.y > 0) {
-                    this.renderer.pos.endY = this.renderer.pos.endY - 5
+                    this.renderer.pos.endY = this.lerp(this.renderer.pos.endY, 0, this.ratio)
                 }
 
                 if (this.renderer.pos.y < (this.sizes.height - this.renderer.sizes.height)) {
-                    this.renderer.pos.endY = this.renderer.pos.endY + 5
+                    this.renderer.pos.endY = this.lerp(this.renderer.pos.endY, (this.sizes.height - this.renderer.sizes.height), this.ratio)
                 }
 
             },
@@ -163,7 +163,7 @@
                 this.$store.state.projects.forEach(project => {
                     this.setElement(project)
                 });
-                this.createTutorial(this.$store.state.tutorial, 'YESS')
+                this.createTutorial(this.$store.state.tutorial, 'tutorial gif')
             },
             setElement(project) {
                 let div = this.createElementWrapper(project)
@@ -265,7 +265,7 @@
                         el.classList.add('viewer-element-debug')
                         let span = document.createElement('span')
                         span.innerText = `${x}%,${y}%`
-                        el.style.transform = `translate(${x * 70}px,${y * 30}px)`
+                        el.style.transform = `translate(${x * this.renderer.sizes.width/100}px,${y * this.renderer.sizes.height/100}px)`
                         el.style.background = `rgba(255,0,0,${Math.random()/2})`
                         el.appendChild(span)
                         this.renderer.el.appendChild(el)

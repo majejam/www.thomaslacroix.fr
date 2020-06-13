@@ -148,10 +148,8 @@
 
                 this.updateMeteorite()
 
-                //this.hold ? this.speedUp() : this.slowDown()
+                this.hold ? this.speedUp() : this.slowDown()
 
-                this.speedUp()
-                
                 this.updateCameraPosition()
 
                 this.renderer.render(this.scene, this.camera)
