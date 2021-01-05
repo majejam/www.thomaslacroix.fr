@@ -53,7 +53,7 @@
     }
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "postprocessing": "^6.10.0",
     "prismic-dom": "^2.1.0",
     "prismic-javascript": "^2.1.5",
