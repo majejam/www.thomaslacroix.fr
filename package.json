@@ -54,11 +54,11 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "postprocessing": "^6.10.0",
+    "postprocessing": "6.10.0",
     "prismic-dom": "^2.1.0",
     "prismic-javascript": "^2.1.5",
     "prismic-vue": "^2.0.0",
-    "three": "^0.113.2",
+    "three": "0.113.2",
     "vue": "^2.6.11",
     "vue-analytics": "^5.22.1",
     "vue-cookie": "^1.1.4",

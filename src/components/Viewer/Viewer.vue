@@ -14,7 +14,7 @@
         data() {
             return {
                 hold: false,
-                ratio: 0.08,
+                ratio: 0.2,
                 hovering: false,
                 speed: 1500,
                 debug: window.location.hash === '#debug',
@@ -89,10 +89,10 @@
 
             },
             setDeltas() {
-                this.cursor.deltaY = this.lerp(this.cursor.deltaY, this.cursor.startY - this.cursor.y, 0.1)
-                this.cursor.deltaX = this.lerp(this.cursor.deltaX, this.cursor.startX - this.cursor.x, 0.1)
-                this.cursor.startX = this.lerp(this.cursor.startX, this.cursor.x, 0.8)
-                this.cursor.startY = this.lerp(this.cursor.startY, this.cursor.y, 0.8)
+                this.cursor.deltaY = this.lerp(this.cursor.deltaY, this.cursor.startY - this.cursor.y, 1)
+                this.cursor.deltaX = this.lerp(this.cursor.deltaX, this.cursor.startX - this.cursor.x, 1)
+                this.cursor.startX = this.lerp(this.cursor.startX, this.cursor.x, 1)
+                this.cursor.startY = this.lerp(this.cursor.startY, this.cursor.y, 1)
             },
             resetDeltas() {
                 this.cursor.deltaY = this.cursor.deltaX = this.cursor.startX = this.cursor.startY = 0
